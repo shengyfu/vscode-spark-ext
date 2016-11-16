@@ -1,4 +1,11 @@
 'use strict';
+import * as path from 'path';
+
+import * as fs from 'fs';
+
+import { workspace, window, commands, ExtensionContext, StatusBarAlignment, TextEditor, Disposable } from 'vscode';
+
+
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
@@ -22,6 +29,18 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     context.subscriptions.push(disposable);
+}
+
+export function createConfigFile(filePath : string, content : string) : void {
+    
+    
+    if (fs.existsSync(filePath)) {
+		fs.appendFile(filePath, content,  { encoding: 'utf8' })
+    }
+    else {
+        fs.writeFileSync(filePath, content, { encoding: 'utf8' });
+    }
+		
 }
 
 // this method is called when your extension is deactivated
