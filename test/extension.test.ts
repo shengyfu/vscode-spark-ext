@@ -13,16 +13,29 @@ import * as myExtension from '../src/extension';
 import * as fs from 'fs';
 import * as path from 'path';
 import { workspace } from 'vscode';
+
+let ROOT_PATH = 'c:/temp'
 // Defines a Mocha test suite to group tests of similar kind together
 suite("Extension Tests", () => {
 
     // Defines a Mocha unit test
     test("createConfigFile", () => {
         var fileName : string = "test.json";
-        var content : string = "{\"typescript.tsdk\": \"./node_modules/typescript/lib\"}";
-        let configFile = path.join("C:/Source/Repos/vscode-spark-ext/.vscode",  fileName);
-        myExtension.createConfigFile(configFile, content);
-        assert.equal(fs.readFileSync(configFile), content);
+        var content : string = "{\"typescript.tsdk\":\"./node_modules/typescript/lib\"}";        
+        let configFile = path.join(ROOT_PATH,  fileName);
+        myExtension.createOrUpdateFile(configFile, content);
+        assert.equal(fs.readFileSync(configFile, 'utf8'), content);
+        fs.truncateSync(configFile);
+    });
+
+    test("createConfigFile2", () => {
+        var fileName : string = "test.json";
+        var content : string = '{"a":"1"}';
+        let configFile = path.join(ROOT_PATH,  fileName);
+        myExtension.createOrUpdateFile(configFile, content);
+        var content2 : string = '{"a":"2","b":"1"}';
+        myExtension.createOrUpdateFile(configFile, content2);
+        assert.equal(fs.readFileSync(configFile, 'utf8'), content2);
         fs.truncateSync(configFile);
     });
 });

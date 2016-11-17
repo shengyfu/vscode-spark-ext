@@ -1,7 +1,7 @@
 {
-    "name": "sparkext-01",
-    "displayName": "SparkExt_01",
-    "description": "extension for spark",
+    "name": "spark",
+    "displayName": "Spark IDE",
+    "description": "Extension for Spark Development",
     "version": "0.0.1",
     "publisher": "ying",
     "engines": {
@@ -11,33 +11,16 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:extension.saySpark"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
+            "command": "extension.saySpark",
+            "title": "Spark Development"
         }],
      "configuration": {
-      "type": "object",
-      "title": "Python Configuration",
-      "properties": {
-        "python.pythonSparkPath": {
-          "type": "string",
-          "default": "/Users/ying/spark-2.0.1-bin-hadoop2.7/bin/spark-submit",
-          "description": "Path to Python, you can use a custom version of Python by modifying this setting to include the full path."
-        },
-        "python.autoComplete.extraPaths": {
-          "type": "array",
-          "default": [
-        "/Users/ying/spark-2.0.1-bin-hadoop2.7/python",
-         "/Users/ying/spark-2.0.1-bin-hadoop2.7/python/pyspark",
-          "/Users/ying/spark-2.0.1-bin-hadoop2.7/python/lib/py4j-0.10.3-src.zip"
-          ],
-          "description": "List of paths to libraries and the like that need to be imported by auto complete engine. E.g. when using Google App SDK, the paths are not in system path, hence need to be added into this list."
-        }
-      }
+      
      }
     },
     "scripts": {
